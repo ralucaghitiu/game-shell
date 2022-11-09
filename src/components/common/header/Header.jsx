@@ -1,8 +1,12 @@
 import { MdGames } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../../store/actions/authActions';
+import { GoogleLogin } from '../../auth';
+import { Button } from '../ui';
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const { authenticated } = useSelector(({ auth }) => {
     const { authenticated } = auth;
 
@@ -18,7 +22,22 @@ export const Header = () => {
         </Link>
       </h1>
 
-      <div>{JSON.stringify(authenticated)}</div>
+      <div>
+        {authenticated ? (
+          <Button
+            type="button"
+            onClick={() => {
+              dispatch(logout());
+            }}
+            skin="primaryInverted"
+            title="Log out"
+          >
+            Log out
+          </Button>
+        ) : (
+          <GoogleLogin></GoogleLogin>
+        )}
+      </div>
     </div>
   );
 };

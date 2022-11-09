@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout } from '../layouts';
+import { AuthorizedLayout, Layout } from '../layouts';
 import { add } from '../store/actions';
 
 export const Play = () => {
@@ -9,20 +9,22 @@ export const Play = () => {
   return (
     <Layout>
       <div className="mx-auto container px-4">
-        <h1>Play</h1>
+        <AuthorizedLayout>
+          <h1>Play</h1>
 
-        <Link to="/" title="Home">
-          Home
-        </Link>
+          <Link to="/" title="Home">
+            Home
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => {
-            dispatch(add());
-          }}
-        >
-          Add
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(add());
+            }}
+          >
+            Add
+          </button>
+        </AuthorizedLayout>
       </div>
     </Layout>
   );
