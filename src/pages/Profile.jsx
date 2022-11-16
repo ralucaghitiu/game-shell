@@ -21,7 +21,7 @@ export const Profile = () => {
             </div>
           </section>
 
-          <section>
+          <section className="mt-4 lg:w-1/4 lg:mt-12 mx-auto">
             <ProfileForm></ProfileForm>
           </section>
         </div>
