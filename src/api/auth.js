@@ -1,9 +1,15 @@
 import jwtDecode from 'jwt-decode';
 import store from '../store';
-import { setUser } from '../store/actions/authActions';
+import {
+  createUser,
+  readUser,
+  setUser,
+  setUserStats,
+} from '../store/actions/authActions';
 import {
   createUserProfile,
   readUserProfile,
+  setCreatureColors,
 } from '../store/actions/profileActions/profileActions';
 
 let initialized = false;
@@ -40,13 +46,23 @@ export const initializeGoogleAuth = async () => {
             }),
           );
 
+          // refactor if possible
           store
             .dispatch(readUserProfile(id))
             .then((data) => {
-              console.log(data);
+              store.dispatch(setCreatureColors(data.creature));
             })
-            .catch((error) => {
+            .catch((_) => {
               store.dispatch(createUserProfile(id));
+            });
+
+          store
+            .dispatch(readUser(id))
+            .then((data) => {
+              store.dispatch(setUserStats(data.stats));
+            })
+            .catch((_) => {
+              store.dispatch(createUser(id));
             });
         },
         scope: 'email profile',

@@ -18,7 +18,7 @@ export const setCreatureColor = (targetKey, colorValue) => {
 };
 
 export const createUserProfile = (id) => {
-  return async (dispatch, getState) => {
+  return async (_, getState) => {
     const state = getState();
     const { profile } = state;
 
@@ -32,8 +32,20 @@ export const createUserProfile = (id) => {
 };
 
 export const readUserProfile = (id) => {
-  return async (dispatch) => {
+  return async () => {
     const { data } = await client.get(`/profiles/${id}`);
+
+    return data;
+  };
+};
+
+export const updateUserProfile = (id, creature) => {
+  return async () => {
+    const payload = {
+      creature,
+    };
+
+    const { data } = await client.patch(`/profiles/${id}`, payload);
 
     return data;
   };

@@ -1,4 +1,9 @@
 const initialState = {
+  stats: {
+    gamesWon: 0,
+    gamesLost: 0,
+    gamesPlayed: 0,
+  },
   creature: {
     mainColor: '#ffabce',
     secondaryColor: '#ff7bad',
@@ -20,6 +25,16 @@ export const profileReducer = (state = initialState, action) => {
           ...state.creature,
           [targetKey]: colorValue,
         },
+      };
+    case 'profile/setCreatureColors':
+      return {
+        ...state,
+        creature: payload,
+      };
+    case 'auth/setUserStats':
+      return {
+        ...state,
+        stats: payload,
       };
     default:
       return state;

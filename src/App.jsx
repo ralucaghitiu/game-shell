@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { FourOhFour, Home, Play, Profile } from './pages';
+import { FourOhFour, Home, Play, Profile, Ranks } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <Profile></Profile>,
+  },
+  {
+    path: '/ranks',
+    element: <Ranks></Ranks>,
   },
   {
     path: '*',
